@@ -205,7 +205,7 @@ function Answer({ data, papers, onCite }) {
 
           {/* Disclaimer - legal minimum */}
           <div style={{ fontSize:"10px", color:"#d1d5db", marginTop:"8px" }}>
-            Not medical advice. For licensed veterinary professionals only.
+VetMD is a research tool designed for licensed veterinarians and veterinary professionals. It generates AI-assisted, evidence-based content and citations. It is not veterinary medical advice, diagnosis, or treatment, and it does not replace independent professional judgment or primary-source verification.
           </div>
         </div>
       </div>
@@ -243,6 +243,7 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [chats, setChats] = useState([]); // [{id, title, createdAt, messages:[{query,result,papers}]}]
   const [activeChatId, setActiveChatId] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const bottomRef = useRef(null);
@@ -337,7 +338,7 @@ export default function Home() {
       `}</style>
 
       {/* Sidebar */}
-      <div style={{ width:"260px", minHeight:"100vh", background:"#f9fafb", borderRight:"1px solid #e5e7eb", display:"flex", flexDirection:"column", flexShrink:0, position:"fixed", top:0, left:0, bottom:0, zIndex:10 }}>
+      <div style={{ width: sidebarOpen ? "260px" : "0px", minHeight:"100vh", background:"#f9fafb", borderRight: sidebarOpen ? "1px solid #e5e7eb" : "none", display:"flex", flexDirection:"column", flexShrink:0, position:"fixed", top:0, left:0, bottom:0, zIndex:10, overflow:"hidden", transition:"width 0.25s ease" }}>
         {/* Logo */}
         <div style={{ padding:"16px", display:"flex", alignItems:"center", gap:"8px" }}>
           <Logo size={28} />
@@ -388,8 +389,16 @@ export default function Home() {
       </div>
 
       {/* Main */}
-      <div style={{ flex:1, marginLeft:"260px", display:"flex", flexDirection:"column", minHeight:"100vh" }}>
+      <div style={{ flex:1, marginLeft: sidebarOpen ? "260px" : "0px", display:"flex", flexDirection:"column", minHeight:"100vh", transition:"margin-left 0.25s ease" }}>
 
+        {/* Top bar with toggle */}
+        <div style={{ position:"sticky", top:0, zIndex:5, background:"#fff", borderBottom:"1px solid #f3f4f6", padding:"10px 16px", display:"flex", alignItems:"center", gap:"8px" }}>
+          <button onClick={() => setSidebarOpen(o => !o)}
+            style={{ background:"transparent", border:"1px solid #e5e7eb", borderRadius:"6px", width:"32px", height:"32px", display:"flex", alignItems:"center", justifyContent:"center", cursor:"pointer", color:"#6b7280", flexShrink:0 }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <span style={{ fontSize:"13px", color:"#9ca3af" }}>VetMD</span>
+        </div>
         {/* Messages area */}
         <div style={{ flex:1, overflowY:"auto", padding:"0 0 120px" }}>
           <div style={{ maxWidth:"680px", margin:"0 auto", padding:"32px 24px" }}>
@@ -413,7 +422,7 @@ export default function Home() {
                 </div>
 
                 <p style={{ fontSize:"10px", color:"#9ca3af", margin:0, textAlign:"center" }}>
-                  Not medical advice · For licensed veterinary professionals only · <a href="/terms" style={{ color:"#9ca3af" }}>Terms</a>
+                  VetMD is a research tool designed for licensed veterinarians and veterinary professionals. It generates AI-assisted, evidence-based content and citations. It is not veterinary medical advice, diagnosis, or treatment, and it does not replace independent professional judgment or primary-source verification.
                 </p>
               </div>
             )}
@@ -448,7 +457,7 @@ export default function Home() {
         </div>
 
         {/* Input bar — fixed at bottom */}
-        <div style={{ position:"fixed", bottom:0, left:"260px", right:0, background:"#fff", borderTop:"1px solid #e5e7eb", padding:"16px 24px" }}>
+        <div style={{ position:"fixed", bottom:0, left: sidebarOpen ? "260px" : "0px", right:0, background:"#fff", borderTop:"1px solid #e5e7eb", padding:"16px 24px", transition:"left 0.25s ease" }}>
           <div style={{ maxWidth:"680px", margin:"0 auto" }}>
             <div style={{ display:"flex", gap:"10px", background:"#f9fafb", border:"1.5px solid #e5e7eb", borderRadius:"12px", padding:"10px 12px", alignItems:"flex-end" }}>
               <textarea
@@ -469,7 +478,7 @@ export default function Home() {
                 }
               </button>
             </div>
-            <div style={{ fontSize:"10px", color:"#d1d5db", textAlign:"center", marginTop:"4px" }}>Not medical advice · For veterinary professionals only</div>
+            <div style={{ fontSize:"10px", color:"#d1d5db", textAlign:"center", marginTop:"4px" }}>VetMD is a research tool designed for licensed veterinarians and veterinary professionals. It generates AI-assisted, evidence-based content and citations. It is not veterinary medical advice, diagnosis, or treatment, and it does not replace independent professional judgment or primary-source verification.</div>
           </div>
         </div>
       </div>
