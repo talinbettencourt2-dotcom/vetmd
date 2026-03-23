@@ -82,10 +82,15 @@ function Answer({ data, papers, onCite }) {
         </div>
       </div>
 
-      {/* AI response */}
-      <div style={{ display:"flex", gap:"10px", alignItems:"flex-start" }}>
-        <div style={{ flexShrink:0, marginTop:"2px" }}><Logo size={28} /></div>
-        <div style={{ flex:1, minWidth:0 }}>
+      {/* AI response - Claude style */}
+      <div style={{ marginBottom:"8px" }}>
+        <div style={{ display:"flex", alignItems:"center", gap:"8px", marginBottom:"12px" }}>
+          <div style={{ animation: "logospin 8s linear infinite", display:"flex", alignItems:"center", justifyContent:"center" }}>
+            <Logo size={24} />
+          </div>
+          <span style={{ fontSize:"13px", fontWeight:"600", color:"#374151" }}>VetMD</span>
+        </div>
+        <div style={{ paddingLeft:"0px" }}>
 
           {/* Urgency pill */}
           <div style={{ display:"inline-flex", alignItems:"center", gap:"6px", background:urgencyConfig.bg, border:`1px solid ${urgencyConfig.border}`, borderRadius:"999px", padding:"4px 12px", marginBottom:"12px" }}>
@@ -330,6 +335,7 @@ export default function Home() {
         @keyframes fadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
         @keyframes spin { to{transform:rotate(360deg)} }
         @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+        @keyframes logospin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
         .chip:hover { background:#eff6ff !important; border-color:#bfdbfe !important; color:#1d4ed8 !important; }
         .go:hover { background:#0d3d6b !important; }
         .hist:hover { background:#f3f4f6 !important; }
@@ -436,11 +442,16 @@ export default function Home() {
 
             {/* Loading */}
             {loading && (
-              <div style={{ display:"flex", gap:"10px", alignItems:"flex-start", marginBottom:"24px" }}>
-                <div style={{ flexShrink:0 }}><Logo size={28} /></div>
-                <div style={{ paddingTop:"6px", display:"flex", gap:"4px" }}>
+              <div style={{ marginBottom:"24px" }}>
+                <div style={{ display:"flex", alignItems:"center", gap:"8px", marginBottom:"12px" }}>
+                  <div style={{ animation:"logospin 1.5s linear infinite", display:"flex" }}>
+                    <Logo size={24} />
+                  </div>
+                  <span style={{ fontSize:"13px", fontWeight:"600", color:"#374151" }}>VetMD</span>
+                </div>
+                <div style={{ display:"flex", gap:"4px", paddingLeft:"0px" }}>
                   {[0,1,2].map(i => (
-                    <div key={i} style={{ width:"7px", height:"7px", borderRadius:"50%", background:"#9ca3af", animation:`pulse 1.2s ease-in-out ${i*0.2}s infinite` }} />
+                    <div key={i} style={{ width:"6px", height:"6px", borderRadius:"50%", background:"#d1d5db", animation:`pulse 1.2s ease-in-out ${i*0.2}s infinite` }} />
                   ))}
                 </div>
               </div>
