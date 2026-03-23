@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import Head from 'next/head'
+import { Analytics } from '@vercel/analytics/next'
 
 export default function App({ Component, pageProps }) {
   return (
@@ -12,6 +13,7 @@ export default function App({ Component, pageProps }) {
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
       <Component {...pageProps} />
+      <Analytics />
     </>
   )
 }
