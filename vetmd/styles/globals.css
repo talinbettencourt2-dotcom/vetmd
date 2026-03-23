@@ -1,0 +1,18 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: #060d16; color: #cde4f0; font-family: 'DM Sans', sans-serif; }
+::placeholder { color: #2a4a5a; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-thumb { background: #1e3a50; border-radius: 3px; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.chip:hover { background: #1a2e40 !important; border-color: #3d9bd4 !important; color: #7eb8d4 !important; }
+.go:hover { background: #2d8abf !important; }
