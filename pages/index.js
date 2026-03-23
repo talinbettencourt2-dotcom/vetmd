@@ -203,9 +203,9 @@ function Answer({ data, papers, onCite }) {
             </div>
           )}
 
-          {/* Disclaimer */}
-          <div style={{ fontSize:"11px", color:"#9ca3af", lineHeight:1.6, paddingTop:"10px", borderTop:"1px solid #f3f4f6" }}>
-            <strong style={{ color:"#6b7280" }}>Disclaimer:</strong> VetMD is a research tool for licensed veterinarians and veterinary professionals. It generates AI-assisted, evidence-based content and citations. It is not veterinary medical advice, diagnosis, or treatment, and does not replace independent professional judgment or primary-source verification.
+          {/* Disclaimer - legal minimum */}
+          <div style={{ fontSize:"10px", color:"#d1d5db", marginTop:"8px" }}>
+            Not medical advice. For licensed veterinary professionals only.
           </div>
         </div>
       </div>
@@ -392,7 +392,7 @@ export default function Home() {
 
         {/* Messages area */}
         <div style={{ flex:1, overflowY:"auto", padding:"0 0 120px" }}>
-          <div style={{ maxWidth:"720px", margin:"0 auto", padding:"32px 24px" }}>
+          <div style={{ maxWidth:"680px", margin:"0 auto", padding:"32px 24px" }}>
 
             {/* Welcome */}
             {!activeChat && !loading && (
@@ -412,11 +412,9 @@ export default function Home() {
                   ))}
                 </div>
 
-                <div style={{ background:"#f8fafc", border:"1px solid #e5e7eb", borderRadius:"10px", padding:"14px 18px" }}>
-                  <p style={{ fontSize:"12px", color:"#6b7280", margin:0, lineHeight:1.7 }}>
-                    <strong style={{ color:"#374151" }}>Disclaimer:</strong> VetMD is a research tool designed for licensed veterinarians and veterinary professionals. It generates AI-assisted, evidence-based content and citations. It is not veterinary medical advice, diagnosis, or treatment, and does not replace independent professional judgment or primary-source verification.
-                  </p>
-                </div>
+                <p style={{ fontSize:"10px", color:"#9ca3af", margin:0, textAlign:"center" }}>
+                  Not medical advice · For licensed veterinary professionals only · <a href="/terms" style={{ color:"#9ca3af" }}>Terms</a>
+                </p>
               </div>
             )}
 
@@ -451,7 +449,7 @@ export default function Home() {
 
         {/* Input bar — fixed at bottom */}
         <div style={{ position:"fixed", bottom:0, left:"260px", right:0, background:"#fff", borderTop:"1px solid #e5e7eb", padding:"16px 24px" }}>
-          <div style={{ maxWidth:"720px", margin:"0 auto" }}>
+          <div style={{ maxWidth:"680px", margin:"0 auto" }}>
             <div style={{ display:"flex", gap:"10px", background:"#f9fafb", border:"1.5px solid #e5e7eb", borderRadius:"12px", padding:"10px 12px", alignItems:"flex-end" }}>
               <textarea
                 ref={inputRef}
@@ -471,7 +469,7 @@ export default function Home() {
                 }
               </button>
             </div>
-            <div style={{ fontSize:"11px", color:"#9ca3af", textAlign:"center", marginTop:"6px" }}>VetMD may make mistakes. Always apply independent clinical judgment.</div>
+            <div style={{ fontSize:"10px", color:"#d1d5db", textAlign:"center", marginTop:"4px" }}>Not medical advice · For veterinary professionals only</div>
           </div>
         </div>
       </div>
