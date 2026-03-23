@@ -75,20 +75,16 @@ function Answer({ data, papers, onCite }) {
 
   return (
     <div style={{ marginBottom:"32px" }}>
-      {/* User bubble */}
-      <div style={{ display:"flex", justifyContent:"flex-end", marginBottom:"12px" }}>
-        <div style={{ background:"#0f4c81", color:"#fff", borderRadius:"18px 18px 4px 18px", padding:"10px 16px", maxWidth:"80%", fontSize:"14px", lineHeight:1.5 }}>
-          {data.query}
-        </div>
+      {/* User query - plain text like Claude */}
+      <div style={{ marginBottom:"20px" }}>
+        <p style={{ fontSize:"18px", fontWeight:"600", color:"#111827", margin:0, lineHeight:1.5 }}>{data.query}</p>
       </div>
 
       {/* AI response - Claude style */}
       <div style={{ marginBottom:"8px" }}>
-        <div style={{ display:"flex", alignItems:"center", gap:"8px", marginBottom:"12px" }}>
-          <div style={{ animation: "logospin 8s linear infinite", display:"flex", alignItems:"center", justifyContent:"center" }}>
-            <Logo size={24} />
-          </div>
-          <span style={{ fontSize:"13px", fontWeight:"600", color:"#374151" }}>VetMD</span>
+        <div style={{ display:"flex", alignItems:"center", gap:"10px", marginBottom:"16px" }}>
+          <Logo size={36} />
+          <span style={{ fontSize:"14px", fontWeight:"600", color:"#374151" }}>VetMD</span>
         </div>
         <div style={{ paddingLeft:"0px" }}>
 
@@ -443,13 +439,13 @@ export default function Home() {
             {/* Loading */}
             {loading && (
               <div style={{ marginBottom:"24px" }}>
-                <div style={{ display:"flex", alignItems:"center", gap:"8px", marginBottom:"12px" }}>
-                  <div style={{ animation:"logospin 1.5s linear infinite", display:"flex" }}>
-                    <Logo size={24} />
+                <div style={{ display:"flex", alignItems:"center", gap:"10px", marginBottom:"16px" }}>
+                  <div style={{ animation:"logospin 1.2s linear infinite", display:"flex" }}>
+                    <Logo size={36} />
                   </div>
-                  <span style={{ fontSize:"13px", fontWeight:"600", color:"#374151" }}>VetMD</span>
+                  <span style={{ fontSize:"14px", fontWeight:"600", color:"#374151" }}>VetMD</span>
                 </div>
-                <div style={{ display:"flex", gap:"4px", paddingLeft:"0px" }}>
+                <div style={{ display:"flex", gap:"4px" }}>
                   {[0,1,2].map(i => (
                     <div key={i} style={{ width:"6px", height:"6px", borderRadius:"50%", background:"#d1d5db", animation:`pulse 1.2s ease-in-out ${i*0.2}s infinite` }} />
                   ))}
