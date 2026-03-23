@@ -269,18 +269,15 @@ export default function Home() {
     if (!trimmed) return;
     setLoading(true); setResult(null); setPapers([]); setError(null); setCurrentQuery(trimmed);
     try {
-      setStage("Searching PubMed...");
-      const found = await searchPubMed(trimmed);
-      setPapers(found);
-
-      setStage("Analysing with AI...");
+      setStage("Searching 4 research databases...");
       const res = await fetch("/api/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: trimmed, papers: found }),
+        body: JSON.stringify({ query: trimmed }),
       });
       const data = await res.json();
       if (data.error) throw new Error(data.error);
+      setPapers(data.papers || []);
       setResult(data);
       setMode(trimmed.toLowerCase().match(/dose|dosing|mg|drug|antibiotic/) ? "vet" : "owner");
     } catch (e) {
