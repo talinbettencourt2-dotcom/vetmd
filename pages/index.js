@@ -337,10 +337,20 @@ export default function Home() {
         .hist:hover { background:#f3f4f6 !important; }
         .new-chat:hover { background:#e5e7eb !important; }
         textarea { resize:none; }
+        @media (max-width: 768px) {
+          .sidebar { transform: translateX(-100%) !important; }
+          .sidebar.open { transform: translateX(0) !important; }
+          .main-content { margin-left: 0 !important; }
+          .input-bar { left: 0 !important; }
+          .two-col { grid-template-columns: 1fr !important; }
+          .sidebar-overlay { display: block !important; }
+          .chip { font-size: 11px !important; padding: 5px 10px !important; }
+          h1 { font-size: 20px !important; }
+        }
       `}</style>
 
       {/* Sidebar */}
-      <div style={{ width: sidebarOpen ? "260px" : "0px", minHeight:"100vh", background:"#f9fafb", borderRight: sidebarOpen ? "1px solid #e5e7eb" : "none", display:"flex", flexDirection:"column", flexShrink:0, position:"fixed", top:0, left:0, bottom:0, zIndex:10, overflow:"hidden", transition:"width 0.25s ease" }}>
+      <div className={`sidebar${sidebarOpen ? ' open' : ''}`} style={{ width:"260px", minHeight:"100vh", background:"#f9fafb", borderRight:"1px solid #e5e7eb", display:"flex", flexDirection:"column", flexShrink:0, position:"fixed", top:0, left:0, bottom:0, zIndex:20, overflow:"hidden", transition:"transform 0.25s ease", transform: sidebarOpen ? "translateX(0)" : "translateX(-100%)" }}>
         {/* Logo */}
         <div style={{ padding:"16px", display:"flex", alignItems:"center", gap:"8px" }}>
           <Logo size={28} />
@@ -390,8 +400,14 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)}
+          style={{ display:"none", position:"fixed", inset:0, background:"rgba(0,0,0,0.3)", zIndex:15 }} />
+      )}
+
       {/* Main */}
-      <div style={{ flex:1, marginLeft: sidebarOpen ? "260px" : "0px", display:"flex", flexDirection:"column", minHeight:"100vh", transition:"margin-left 0.25s ease" }}>
+      <div className="main-content" style={{ flex:1, marginLeft: sidebarOpen ? "260px" : "0px", display:"flex", flexDirection:"column", minHeight:"100vh", transition:"margin-left 0.25s ease" }}>
 
         {/* Top bar with toggle */}
         <div style={{ position:"sticky", top:0, zIndex:5, background:"#fff", borderBottom:"1px solid #f3f4f6", padding:"10px 16px", display:"flex", alignItems:"center", gap:"8px" }}>
@@ -403,7 +419,7 @@ export default function Home() {
         </div>
         {/* Messages area */}
         <div style={{ flex:1, overflowY:"auto", padding:"0 0 120px" }}>
-          <div style={{ maxWidth:"680px", margin:"0 auto", padding:"32px 24px" }}>
+          <div style={{ maxWidth:"680px", margin:"0 auto", padding:"24px 16px" }}>
 
             {/* Welcome */}
             {!activeChat && !loading && (
@@ -464,7 +480,7 @@ export default function Home() {
         </div>
 
         {/* Input bar — fixed at bottom */}
-        <div style={{ position:"fixed", bottom:0, left: sidebarOpen ? "260px" : "0px", right:0, background:"#fff", borderTop:"1px solid #e5e7eb", padding:"16px 24px", transition:"left 0.25s ease" }}>
+        <div className="input-bar" style={{ position:"fixed", bottom:0, left: sidebarOpen ? "260px" : "0px", right:0, background:"#fff", borderTop:"1px solid #e5e7eb", padding:"12px 16px", transition:"left 0.25s ease", zIndex:10 }}>
           <div style={{ maxWidth:"680px", margin:"0 auto" }}>
             <div style={{ display:"flex", gap:"10px", background:"#f9fafb", border:"1.5px solid #e5e7eb", borderRadius:"12px", padding:"10px 12px", alignItems:"flex-end" }}>
               <textarea
