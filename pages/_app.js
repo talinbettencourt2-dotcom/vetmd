@@ -10,6 +10,8 @@ export default function App({ Component, pageProps }) {
       {...pageProps}
       afterSignInUrl="/app"
       afterSignUpUrl="/app"
+      signInUrl="/sign-in"
+      signUpUrl="/sign-in"
     >
       <Head>
         <title>VetMD — Evidence-Based Veterinary AI</title>
