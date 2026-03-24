@@ -6,7 +6,11 @@ const LOGO_SVG = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><r
 
 export default function App({ Component, pageProps }) {
   return (
-    <ClerkProvider {...pageProps}>
+    <ClerkProvider
+      {...pageProps}
+      afterSignInUrl="/app"
+      afterSignUpUrl="/app"
+    >
       <Head>
         <title>VetMD — Evidence-Based Veterinary AI</title>
         <meta name="description" content="AI-assisted veterinary research tool for licensed veterinary professionals" />
