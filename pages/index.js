@@ -245,7 +245,6 @@ export default function Home() {
   const [chats, setChats] = useState([]); // [{id, title, createdAt, messages:[{query,result,papers}]}]
   const [activeChatId, setActiveChatId] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  useEffect(() => { setSidebarOpen(window.innerWidth >= 768); }, []);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const bottomRef = useRef(null);
@@ -256,6 +255,8 @@ export default function Home() {
     link.type = "image/svg+xml"; link.rel = "icon";
     link.href = `data:image/svg+xml,${LOGO_SVG}`;
     document.head.appendChild(link);
+    // Open sidebar by default on desktop only
+    if (window.innerWidth > 768) setSidebarOpen(true);
   }, []);
 
   useEffect(() => {
@@ -339,14 +340,16 @@ export default function Home() {
         .new-chat:hover { background:#e5e7eb !important; }
         textarea { resize:none; }
         @media (max-width: 768px) {
-          .sidebar { transform: translateX(-100%) !important; }
-          .sidebar.open { transform: translateX(0) !important; }
+          .sidebar { width: 260px !important; }
           .main-content { margin-left: 0 !important; }
           .input-bar { left: 0 !important; }
           .two-col { grid-template-columns: 1fr !important; }
           .sidebar-overlay { display: block !important; }
           .chip { font-size: 11px !important; padding: 5px 10px !important; }
-          h1 { font-size: 20px !important; }
+          .welcome-title { font-size: 20px !important; }
+          .welcome-sub { font-size: 13px !important; }
+          .chips-wrap { gap: 6px !important; }
+          .msg-padding { padding: 20px 14px !important; }
         }
       `}</style>
 
@@ -420,7 +423,7 @@ export default function Home() {
         </div>
         {/* Messages area */}
         <div style={{ flex:1, overflowY:"auto", padding:"0 0 120px" }}>
-          <div style={{ maxWidth:"680px", margin:"0 auto", padding:"24px 16px" }}>
+          <div className="msg-padding" style={{ maxWidth:"680px", margin:"0 auto", padding:"24px 16px" }}>
 
             {/* Welcome */}
             {!activeChat && !loading && (
@@ -428,10 +431,10 @@ export default function Home() {
                 <div style={{ display:"flex", justifyContent:"center", marginBottom:"20px" }}>
                   <Logo size={48} />
                 </div>
-                <h1 style={{ fontSize:"24px", fontWeight:"700", color:"#111827", textAlign:"center", letterSpacing:"-0.02em", margin:"0 0 8px" }}>How can I help you today?</h1>
-                <p style={{ color:"#6b7280", fontSize:"14px", textAlign:"center", margin:"0 0 32px" }}>Search peer-reviewed veterinary literature for evidence-based clinical answers</p>
+                <h1 className="welcome-title" style={{ fontSize:"24px", fontWeight:"700", color:"#111827", textAlign:"center", letterSpacing:"-0.02em", margin:"0 0 8px" }}>How can I help you today?</h1>
+                <p className="welcome-sub" style={{ color:"#6b7280", fontSize:"14px", textAlign:"center", margin:"0 0 24px" }}>Search peer-reviewed veterinary literature for evidence-based clinical answers</p>
 
-                <div style={{ display:"flex", flexWrap:"wrap", gap:"8px", justifyContent:"center", marginBottom:"32px" }}>
+                <div className="chips-wrap" style={{ display:"flex", flexWrap:"wrap", gap:"8px", justifyContent:"center", marginBottom:"24px" }}>
                   {SUGGESTIONS.map((s,i) => (
                     <button key={i} className="chip" onClick={() => { setQuery(s); setTimeout(() => inputRef.current?.focus(), 0); }}
                       style={{ background:"#f9fafb", border:"1px solid #e5e7eb", borderRadius:"999px", color:"#374151", fontSize:"12px", padding:"6px 14px", cursor:"pointer", fontFamily:"inherit", transition:"all 0.15s" }}>
